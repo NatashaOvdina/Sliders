@@ -8,7 +8,7 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
-
+    
     // MARK: - IB Outlets
     @IBOutlet var mainView: UIView!
     
@@ -20,20 +20,20 @@ final class SettingsViewController: UIViewController {
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
     
+    var colorOfMainView: UIColor!
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 10
-        makeColoredBackground()
+        mainView.backgroundColor = colorOfMainView
+        getRGBColors()
+    
         
-        redValue.text = string(from: redSlider)
-        greenValue.text = string(from: greenSlider)
-        blueValue.text = string(from: blueSlider)
     }
     
     // MARK: - IB Actions
     @IBAction func sliderAction(_ sender: UISlider) {
-        makeColoredBackground()
         
         switch sender {
         case redSlider:
@@ -43,12 +43,12 @@ final class SettingsViewController: UIViewController {
         default:
             blueValue.text = string(from: blueSlider)
         }
+        setupColor()
     }
     
     
-    // MARK: - Private Methods
-    private func makeColoredBackground() {
-        let backgroundColored = UIColor(
+    private func setupColor() {
+        mainView.backgroundColor = UIColor(
             red: CGFloat(
                 redSlider.value
             ),
@@ -60,13 +60,25 @@ final class SettingsViewController: UIViewController {
             ),
             alpha: 1
         )
-        mainView.backgroundColor = backgroundColored
     }
     
     private func string(from slider: UISlider) -> String {
         String(format: "%.2f", slider.value)
     }
+    
+   private func getRGBColors() {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        
+        colorOfMainView.getRed(&red, green: &green, blue: &blue, alpha: nil)
+        
+        redSlider.value = Float(red)
+        greenSlider.value = Float(green)
+        blueSlider.value = Float(blue)
+        
+        redValue.text = string(from: redSlider)
+        greenValue.text = string(from: greenSlider)
+        blueValue.text = string(from: blueSlider)
+    }
 }
-
-
-

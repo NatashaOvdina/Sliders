@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="tFL-aA-bTZ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="EDZ-af-LP9">
                         <barButtonItem key="rightBarButtonItem" image="square.and.pencil" catalog="system" id="9uN-G3-xjt">
@@ -107,21 +107,21 @@
                                                 <rect key="frame" x="-2" y="0.0" width="180" height="31"/>
                                                 <color key="minimumTrackTintColor" systemColor="systemRedColor"/>
                                                 <connections>
-                                                    <action selector="sliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="XU0-CD-ERL"/>
+                                                    <action selector="sliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="Tg7-oc-j3u"/>
                                                 </connections>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="z0o-dq-crc">
                                                 <rect key="frame" x="-2" y="45" width="180" height="31"/>
                                                 <color key="minimumTrackTintColor" red="0.29245944899999998" green="0.66488804769999998" blue="0.13323449060000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <connections>
-                                                    <action selector="sliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="LxJ-sy-eNz"/>
+                                                    <action selector="sliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="Z3r-sT-Kdm"/>
                                                 </connections>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="coo-xW-I8h">
                                                 <rect key="frame" x="-2" y="90" width="180" height="31"/>
                                                 <color key="minimumTrackTintColor" systemColor="tableCellBlueTextColor"/>
                                                 <connections>
-                                                    <action selector="sliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="qSs-Ab-qN8"/>
+                                                    <action selector="sliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="HIl-My-3Xp"/>
                                                 </connections>
                                             </slider>
                                         </subviews>
