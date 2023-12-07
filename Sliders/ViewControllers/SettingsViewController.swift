@@ -22,6 +22,7 @@ final class SettingsViewController: UIViewController {
     
     var colorOfMainView: UIColor!
     
+    weak var delegate: SettingsViewControllerDelegate?
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,13 @@ final class SettingsViewController: UIViewController {
     }
     
     
+    @IBAction func buttonActionToReturn() {
+        view.endEditing(true)
+        delegate?.set(mainView.backgroundColor ?? .gray)
+        dismiss(animated: true)
+    }
+    
+    // MARK: - Private Methods
     private func setupColor() {
         mainView.backgroundColor = UIColor(
             red: CGFloat(
@@ -60,10 +68,6 @@ final class SettingsViewController: UIViewController {
             ),
             alpha: 1
         )
-    }
-    
-    private func string(from slider: UISlider) -> String {
-        String(format: "%.2f", slider.value)
     }
     
    private func getRGBColors() {
@@ -81,4 +85,10 @@ final class SettingsViewController: UIViewController {
         greenValue.text = string(from: greenSlider)
         blueValue.text = string(from: blueSlider)
     }
+    
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
+    }
 }
+
+
