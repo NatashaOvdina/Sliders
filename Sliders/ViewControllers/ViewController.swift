@@ -25,23 +25,26 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 10
         makeColoredBackground()
+        
+        redValue.text = string(from: redSlider)
+        greenValue.text = string(from: greenSlider)
+        blueValue.text = string(from: blueSlider)
     }
     
     // MARK: - IB Actions
-    @IBAction func redSliderAction() {
-        redValue.text = String(format: "%.2f", redSlider.value)
+    @IBAction func sliderAction(_ sender: UISlider) {
         makeColoredBackground()
+        
+        switch sender {
+        case redSlider:
+            redValue.text = string(from: redSlider)
+        case greenSlider:
+            greenValue.text = string(from: greenSlider)
+        default:
+            blueValue.text = string(from: blueSlider)
+        }
     }
     
-    @IBAction func greenSliderAction() {
-        greenValue.text = String(format: "%.2f", greenSlider.value)
-        makeColoredBackground()
-    }
-    
-    @IBAction func blueSliderAction() {
-        blueValue.text = String(format: "%.2f", blueSlider.value)
-        makeColoredBackground()
-    }
     
     // MARK: - Private Methods
     private func makeColoredBackground() {
@@ -58,6 +61,10 @@ final class ViewController: UIViewController {
             alpha: 1
         )
         mainView.backgroundColor = backgroundColored
+    }
+    
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
     }
 }
 
