@@ -142,7 +142,7 @@ extension SettingsViewController: UITextFieldDelegate {
         let previousGreenValue = greenValue.text
         let previousBlueValue = blueValue.text
         
-        if let value = Float(text), value.description.count <= 4  {
+        if let value = Float(text) {
             
             switch textField {
             case redTextField:
