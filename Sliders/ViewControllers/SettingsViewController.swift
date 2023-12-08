@@ -62,7 +62,7 @@ final class SettingsViewController: UIViewController {
     
     @IBAction func buttonActionToReturn() {
         view.endEditing(true)
-        delegate?.set(mainView.backgroundColor ?? .gray)
+        delegate?.setColor(mainView.backgroundColor ?? .gray)
         dismiss(animated: true)
     }
     
@@ -136,36 +136,47 @@ final class SettingsViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 extension SettingsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let value = Float(textField.text ?? ""), 
-                value >= redSlider.minimumValue && value <= redSlider.maximumValue && value.description.count <= 4 else {
+        guard let text = textField.text else { return }
+        
+        let previousRedValue = redValue.text
+        let previousGreenValue = greenValue.text
+        let previousBlueValue = blueValue.text
+        
+        if let value = Float(text), value.description.count <= 4  {
             
+            switch textField {
+            case redTextField:
+                redSlider.setValue(value, animated: true)
+                redValue.text = string(from: redSlider)
+                redTextField.text = redValue.text
+                setupColor()
+            case greenTextField:
+                greenSlider.setValue(value, animated: true)
+                greenValue.text = string(from: greenSlider)
+                greenTextField.text = greenValue.text
+                setupColor()
+            default:
+                blueSlider.setValue(value, animated: true)
+                blueValue.text = string(from: blueSlider)
+                blueTextField.text = blueValue.text
+                setupColor()
+            }
+            
+        } else {
             showAlert(
                 withTitle: "Wrong format!",
                 andMessage: "Please, enter correct value"
             )
-            textField.text = ""
+            redTextField.text = previousRedValue
+            greenTextField.text = previousGreenValue
+            blueTextField.text = previousBlueValue
             return
-        }
-        switch textField {
-        case redTextField:
-            redSlider.value = value
-            redValue.text = string(from: redSlider)
-            setupColor()
-        case greenTextField:
-            greenSlider.value = value
-            greenValue.text = string(from: greenSlider)
-            setupColor()
-        default:
-            blueSlider.value = value
-            blueValue.text = string(from: blueSlider)
-            setupColor()
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
     }
 }
-
 
 
 
