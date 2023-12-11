@@ -34,7 +34,11 @@ final class SettingsViewController: UIViewController {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 10
         mainView.backgroundColor = colorOfMainView
-        getRGBColors()
+        getRGBColors(for: redSlider)
+        getRGBColors(for: greenSlider)
+        getRGBColors(for: blueSlider)
+        shareValuesToLabels()
+        shareValuesToTF()
         
         redTextField.delegate = self
         greenTextField.delegate = self
@@ -89,21 +93,21 @@ final class SettingsViewController: UIViewController {
         )
     }
     
-    private func getRGBColors() {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
+    private func getRGBColors(for colorSlider: UISlider) {
+        let ciColor = CIColor(color: mainView.backgroundColor ?? .gray)
         
-        colorOfMainView.getRed(&red, green: &green, blue: &blue, alpha: nil)
-        
-        redSlider.value = Float(red)
-        greenSlider.value = Float(green)
-        blueSlider.value = Float(blue)
-        
+        redSlider.value = Float(ciColor.red)
+        greenSlider.value = Float(ciColor.green)
+        blueSlider.value = Float(ciColor.blue)
+    }
+    
+    private func shareValuesToLabels() {
         redValue.text = string(from: redSlider)
         greenValue.text = string(from: greenSlider)
         blueValue.text = string(from: blueSlider)
-        
+    }
+    
+    private func shareValuesToTF() {
         redTextField.text = redValue.text
         greenTextField.text = greenValue.text
         blueTextField.text = blueValue.text
