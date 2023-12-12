@@ -34,9 +34,7 @@ final class SettingsViewController: UIViewController {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 10
         mainView.backgroundColor = colorOfMainView
-        getRGBColors(for: redSlider)
-        getRGBColors(for: greenSlider)
-        getRGBColors(for: blueSlider)
+        getRGBColors(for: redSlider, greenSlider, blueSlider)
         shareValuesToLabels()
         shareValuesToTF()
         
@@ -93,7 +91,7 @@ final class SettingsViewController: UIViewController {
         )
     }
     
-    private func getRGBColors(for colorSlider: UISlider) {
+    private func getRGBColors(for colorSlider: UISlider...) {
         let ciColor = CIColor(color: mainView.backgroundColor ?? .gray)
         
         redSlider.value = Float(ciColor.red)
