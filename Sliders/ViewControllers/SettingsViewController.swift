@@ -74,7 +74,6 @@ final class SettingsViewController: UIViewController {
         view.endEditing(true)
     }
     
-    
     // MARK: - Private Methods
     private func setupColor() {
         mainView.backgroundColor = UIColor(
@@ -138,7 +137,7 @@ final class SettingsViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 extension SettingsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let text = textField.text else { return }
+        guard let text = textField.text  else { return }
         
         let previousRedValue = redValue.text
         let previousGreenValue = greenValue.text
@@ -177,6 +176,27 @@ extension SettingsViewController: UITextFieldDelegate {
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard textField !== greenTextField else { return }
+        guard textField !== blueTextField else { return }
+        let keyboardToolBar = UIToolbar()
+        keyboardToolBar.sizeToFit()
+        textField.inputAccessoryView = keyboardToolBar
+        
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: textField,
+            action: #selector(resignFirstResponder)
+        )
+        
+        let flexBarButton = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        keyboardToolBar.items = [flexBarButton, doneButton]
     }
 }
 
